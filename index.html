@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin:0px;
+            background: #333;
+        }
+        rect[data-level="0"]{
+            fill:#161b22;
+        }        
+        rect[data-level="1"]{
+            fill:#0e4429;
+        }        
+        rect[data-level="2"]{
+            fill:#006d32;
+        }        
+        rect[data-level="3"]{
+            fill:#26a641;
+        }        
+        rect[data-level="4"]{
+            fill: #39d353;
+        }
+        
+        #targ div{
+            width:5px;
+            height:5px;
+            /* margin:1px; */
+            background: #fff;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- this svg element is here because i was making this script in js -->
+    <!-- this works as an reference -->
+    <svg width="722" height="112" class="js-calendar-graph-svg">
+    </svg>
+
+<script src="./main.js"></script>
+</body>
+</html>
