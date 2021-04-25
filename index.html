@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin:0px;
+            background: #333;
+        }
+        rect[data-level="0"]{
+            fill:#161b22;
+        }        
+        rect[data-level="5"]{
+            fill: #39d353;
+        }
+        
+        #targ div{
+            width:5px;
+            height:5px;
+            /* margin:1px; */
+            background: #fff;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+
+    <svg width="722" height="112" class="js-calendar-graph-svg">
+        <g transform="translate(10, 20)" data-hydro-click="{&quot;event_type&quot;:&quot;user_profile.click&quot;,&quot;payload&quot;:{&quot;profile_user_id&quot;:31966594,&quot;target&quot;:&quot;CONTRIBUTION_CALENDAR_SQUARE&quot;,&quot;user_id&quot;:null,&quot;originating_url&quot;:&quot;https://github.com/PrashanthKumar0&quot;}}" data-hydro-click-hmac="985fe0e983e1e20319d92d528a64a2a5a20bc3acf5cafd1cdccdf6a1f10085cb">
+
+            <!--!reference -->
+            <!-- <g transform="translate(0, 0)">
+                <rect width="10" height="10" x="14" y="0" class="ContributionCalendar-day" rx="2" ry="2" data-count="0" data-date="2020-04-26" data-level="0"></rect>
+                <rect width="10" height="10" x="14" y="13" class="ContributionCalendar-day" rx="2" ry="2" data-count="0" data-date="2020-04-27" data-level="0"></rect>
+            </g>
+    
+        <g transform="translate(728, 0)">
+            <rect width="10" height="10" x="-38" y="0" class="ContributionCalendar-day" rx="2" ry="2" data-count="4" data-date="2021-04-25" data-level="4"></rect>
+        </g>
+         -->
+        <text x="27" y="-7" class="ContributionCalendar-label">May</text>
+        <text x="92" y="-7" class="ContributionCalendar-label">Jun</text>
+        <text x="144" y="-7" class="ContributionCalendar-label">Jul</text>
+        <text x="196" y="-7" class="ContributionCalendar-label">Aug</text>
+        <text x="261" y="-7" class="ContributionCalendar-label">Sep</text>
+        <text x="313" y="-7" class="ContributionCalendar-label">Oct</text>
+        <text x="365" y="-7" class="ContributionCalendar-label">Nov</text>
+        <text x="430" y="-7" class="ContributionCalendar-label">Dec</text>
+        <text x="482" y="-7" class="ContributionCalendar-label">Jan</text>
+        <text x="547" y="-7" class="ContributionCalendar-label">Feb</text>
+        <text x="599" y="-7" class="ContributionCalendar-label">Mar</text>
+        <text x="651" y="-7" class="ContributionCalendar-label">Apr</text>
+        <text text-anchor="start" class="ContributionCalendar-label" dx="-10" dy="8" style="display: none;">Sun</text>
+        <text text-anchor="start" class="ContributionCalendar-label" dx="-10" dy="22">Mon</text>
+        <text text-anchor="start" class="ContributionCalendar-label" dx="-10" dy="32" style="display: none;">Tue</text>
+        <text text-anchor="start" class="ContributionCalendar-label" dx="-10" dy="48">Wed</text>
+        <text text-anchor="start" class="ContributionCalendar-label" dx="-10" dy="57" style="display: none;">Thu</text>
+        <text text-anchor="start" class="ContributionCalendar-label" dx="-10" dy="73">Fri</text>
+        <text text-anchor="start" class="ContributionCalendar-label" dx="-10" dy="81" style="display: none;">Sat</text>
+        </g>
+    </svg>
+
+
+
+<script>
+        var ba_targ,ba_cnvs,ba_vid,
+        // ba_ctx,ba_url="https://drive.google.com/uc?id=15Ce665y13ScvMIUZPLkqBmAl4n7cjro-&export=download"
+        ba_ctx,ba_url="https://cors-anywhere.herokuapp.com/https://drive.google.com/uc?id=15Ce665y13ScvMIUZPLkqBmAl4n7cjro-&export=download"
+        ,ba_vid_w,ba_vid_h,ba_vid_g_dim,ba_vid_cx,ba_vid_cy;
+        const grid_w=52,grid_h=52; //width and height of grids (px)
+
+        function start(){
+            ba_cnvs=document.createElement("canvas");
+            ba_ctx=ba_cnvs.getContext("2d");
+            ba_vid=document.createElement("video");
+            ba_vid.src=ba_url;
+            ba_vid.oncanplaythrough=playBadApple;
+           
+            // target element
+            ba_targ=document.querySelector(".js-calendar-graph-svg");
+            ba_targ.setAttribute("width",grid_w*14); //14 and 13 are from svg
+            ba_targ.setAttribute("height",grid_h*13); 
+            ba_targ=ba_targ.children[0];
+
+            window.removeEventListener("click",start);        
+        }
+
+        function setLevelAt(x,y,level=0){
+            // x+=19;//it starts from 19 //removed
+            return document.querySelector(".js-calendar-graph-svg").children[0].children[x].children[y].setAttribute('data-level',level);
+        }
+
+        //for generating grid
+        function createElement(numx,numy){
+            var svgs='<g transform="translate(10, 20)" data-hydro-click="{&quot;event_type&quot;:&quot;user_profile.click&quot;,&quot;payload&quot;:{&quot;profile_user_id&quot;:31966594,&quot;target&quot;:&quot;CONTRIBUTION_CALENDAR_SQUARE&quot;,&quot;user_id&quot;:null,&quot;originating_url&quot;:&quot;https://github.com/PrashanthKumar0&quot;}}" data-hydro-click-hmac="985fe0e983e1e20319d92d528a64a2a5a20bc3acf5cafd1cdccdf6a1f10085cb">';
+            var cols='';
+            
+            for(var y=0;y<numy;y++){
+                cols+='<rect width="10" height="10" x="14" y="'+(13*y)+'" class="ContributionCalendar-day" rx="2" ry="2" data-count="0" data-date="2020-04-26" data-level="0"></rect>';
+            }
+            
+            for(var x=0;x<numx;x++){
+                svgs+='<g transform="translate('+(14*x)+', 0)">'+cols+'</g>';          
+            }
+            svgs+=`
+                    <text x="27" y="-7" class="ContributionCalendar-label">May</text>
+                    <text x="92" y="-7" class="ContributionCalendar-label">Jun</text>
+                    <text x="144" y="-7" class="ContributionCalendar-label">Jul</text>
+                    <text x="196" y="-7" class="ContributionCalendar-label">Aug</text>
+                    <text x="261" y="-7" class="ContributionCalendar-label">Sep</text>
+                    <text x="313" y="-7" class="ContributionCalendar-label">Oct</text>
+                    <text x="365" y="-7" class="ContributionCalendar-label">Nov</text>
+                    <text x="430" y="-7" class="ContributionCalendar-label">Dec</text>
+                    <text x="482" y="-7" class="ContributionCalendar-label">Jan</text>
+                    <text x="547" y="-7" class="ContributionCalendar-label">Feb</text>
+                    <text x="599" y="-7" class="ContributionCalendar-label">Mar</text>
+                    <text x="651" y="-7" class="ContributionCalendar-label">Apr</text>
+                    <text text-anchor="start" class="ContributionCalendar-label" dx="-10" dy="8" style="display: none;">Sun</text>
+                    <text text-anchor="start" class="ContributionCalendar-label" dx="-10" dy="22">Mon</text>
+                    <text text-anchor="start" class="ContributionCalendar-label" dx="-10" dy="32" style="display: none;">Tue</text>
+                    <text text-anchor="start" class="ContributionCalendar-label" dx="-10" dy="48">Wed</text>
+                    <text text-anchor="start" class="ContributionCalendar-label" dx="-10" dy="57" style="display: none;">Thu</text>
+                    <text text-anchor="start" class="ContributionCalendar-label" dx="-10" dy="73">Fri</text>
+                    <text text-anchor="start" class="ContributionCalendar-label" dx="-10" dy="81" style="display: none;">Sat</text>        
+                </g>
+            `;
+            return svgs;
+        }
+
+        function playBadApple(){
+            // just for testing
+            // document.body.appendChild(ba_vid);
+            // document.body.appendChild(ba_cnvs);
+            ba_vid.style.width="100%";
+            ba_vid.style.width="100%";
+            ba_vid.controls=1;
+            // ba_cnvs.style.width="100%";
+            console.log("playing bad apple");
+            // --end
+
+            ba_vid_w=ba_vid.videoWidth;
+            ba_vid_h=ba_vid.videoHeight;
+            ba_cnvs.width=grid_w;    
+            ba_cnvs.height=grid_h;         
+            ba_vid_g_dim=ba_vid_w>ba_vid_h?ba_vid_w:ba_vid_h;
+            ba_vid_cx=Math.round(ba_vid_w/2);
+            ba_vid_cy=Math.round(ba_vid_h/2);
+
+
+            
+            //populate cells
+            document.querySelector(".js-calendar-graph-svg").innerHTML=createElement(grid_w,grid_h);
+
+            ba_vid.play();
+            looper(); // ;)
+        }
+
+
+        
+
+
+        function looper(){
+            
+            ba_ctx.drawImage(ba_vid,0,0,ba_vid_w,ba_vid_h,0,0,grid_w,grid_h);
+            var data=ba_ctx.getImageData(0,0,grid_w,grid_h).data;
+            
+            for(var y=0;y<grid_h;y++){
+                for(var x=0;x<grid_w;x++){
+                    var i=(y*grid_w+x)*4;
+                    var avg=data[i]+data[i+1]+data[i+2]; // we can use without average actually for bad apple
+                    if(data[i]>=0 && data[i]<135) setLevelAt(x,y,0);
+                    if(data[i]>=135 && data[i]<270) setLevelAt(x,y,1);
+                    if(data[i]>=270 && data[i]<405) setLevelAt(x,y,2);
+                    if(data[i]>=405 && data[i]<540) setLevelAt(x,y,3);
+                    if(data[i]>=540) setLevelAt(x,y,4);
+                }
+            }
+
+            //request next frame
+            if(!ba_vid.ended){
+                var fps=25;
+                setTimeout(looper,1000/fps);
+                // requestAnimationFrame(looper);
+            } else {
+                console.log("ended!");
+            }
+            
+        }
+
+
+        window.addEventListener("click",start);
+    
+    </script>
+</body>
+</html>
