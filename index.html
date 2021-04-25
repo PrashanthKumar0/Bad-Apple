@@ -46,10 +46,8 @@
 <script>
         var ba_targ,ba_cnvs,ba_vid,
         ba_ctx,
-        // ba_url="https://cors-proxy.htmldriven.com/?url=http://localhost:5500/video.mp4"
-        // ba_url="https://cors-anywhere.herokuapp.com/https://drive.google.com/uc?id=15Ce665y13ScvMIUZPLkqBmAl4n7cjro-&export=download"
-        ba_url="https://prashanth-kumar.herokuapp.com/"
-        // ba_url="http://www.whateverorigin.org/get?url=https://github.com/PrashanthKumar0/Bad-Apple/raw/master/video.mp4"
+        ba_url="./video.mp4"
+        // ba_url="https://prashanth-kumar.herokuapp.com/"
         ,ba_vid_w,ba_vid_h,ba_vid_g_dim,ba_vid_cx,ba_vid_cy;
         const grid_w=52,grid_h=52; //width and height of grids (px)
 
@@ -167,7 +165,7 @@
 
             //request next frame
             if(!ba_vid.ended){
-                var fps=25;
+                var fps=60;
                 setTimeout(looper,1000/fps);
                 // requestAnimationFrame(looper);
             } else {
