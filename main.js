@@ -7,13 +7,15 @@
  * 
  * just like this one [ https://chrome.google.com/webstore/detail/disable-content-security/ieelmcmcagommplceebfedjlakkhpden ]
  * 
+ * or disable content security by heading to about:config and search for content security (security.csp.enable) and set it to false
  * 
+ *
  */
 
 var ba_targ,ba_cnvs,ba_vid,
 ba_ctx,
 // ba_url="http://localhost:5500/Bad Apple.mp4" //for local test with vscode's live server
-ba_url="http://localhost/" //videoStreamer.php is running on it (u can also use any url with https://cors-anywhere.herokuapp.com for dealing with cors )
+ba_url="http://localhost:8080/" //videoStreamer.php is running on it (u can also use any url with https://cors-anywhere.herokuapp.com for dealing with cors )
 // ba_url="https://prashanth-kumar.herokuapp.com/"
 ,ba_vid_w,ba_vid_h,ba_vid_g_dim,ba_vid_cx,ba_vid_cy;
 const grid_w=52,grid_h=52; //width and height of grids (px)
