@@ -46,7 +46,6 @@ class VideoStream
         header("Content-Type: video/mp4");
         header("Cache-Control: max-age=2592000, public");
         header("Access-Control-Allow-Origin: *");
-        header("Content-Security-Policy: media-src *");
         header("Expires: ".gmdate('D, d M Y H:i:s', time()+2592000) . ' GMT');
         header("Last-Modified: ".gmdate('D, d M Y H:i:s', @filemtime($this->path)) . ' GMT' );
         $this->start = 0;
